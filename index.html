@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>세종수목원 안내판 지도</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; }
+    #map { height: 100vh; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    const map = L.map('map').setView([36.4805, 127.2857], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    }).addTo(map);
+
+    const markers = [
+      { name: "복수초", lat: 36.4810, lng: 127.2870 },
+      { name: "작약", lat: 36.4830, lng: 127.2860 },
+      { name: "매화", lat: 36.4840, lng: 127.2855 }
+    ];
+
+    markers.forEach(p => {
+      const marker = L.marker([p.lat, p.lng], { draggable: true }).addTo(map);
+      marker.bindPopup(`<b>${p.name}</b>`);
+    });
+  </script>
+</body>
+</html>
